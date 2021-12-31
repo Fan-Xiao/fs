@@ -1,0 +1,92 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>张伟简介</title>
+
+  <style>
+    #body1 {
+      background-color: black;
+    }
+
+    .c1 {
+      width: 50px;
+      height: 50px;
+      font-size: 50px;
+      color: white;
+      position: fixed;
+      top: 400px;
+      left: 200px;
+    }
+
+  </style>
+
+  <script>
+
+    //随机出现的文字
+    a = ["张伟", "傻逼", "SB", "辣鸡", "狗屎", "菜鸡", "二比", "死🐎仔", "A", "B", "C", "D", "a", "b", "c", "d"];
+
+    //方块个数
+    n = 100;
+
+    //所有方块坐标和大小
+    x = new Array(n);
+    y = new Array(n);
+    s = new Array(n);
+
+
+    //定时器
+    function next() {
+
+      //所有方块下移动
+      for (i = 0; i <= y.length - 1; i = i + 1) {
+        y[i] = y[i] + s[i];
+        if (y[i] > 800) {
+          y[i] = 0;
+        }
+      }
+
+
+      //显示所有方块
+      var all = document.getElementsByClassName("c1");
+      for (i = 0; i <= all.length; i = i + 1) {
+
+        all[i].style.top = y[i] + "px";
+        all[i].style.left = x[i] + "px";
+        all[i].style.height = s[i] + "px";
+        all[i].style.width = s[i] + "px";
+        all[i].style.fontSize = s[i] + "px";
+      }
+
+    }
+
+
+    window.onload = function main() {
+
+
+      //生成n个div
+      divs = "";
+      for (i = 0; i <= n - 1; i = i + 1) {
+        w = parseInt(Math.random() * 16)
+        x[i] = parseInt(Math.random() * 1800)
+        y[i] = parseInt(Math.random() * 800)
+        s[i] = parseInt(Math.random() * 50 + 1)
+        divs = divs + "<div  class='c1'>" + a[w] + "</div>";
+      }
+
+      //把n个方块放到body1里面
+      body1.innerHTML = divs;
+
+
+      //启动定时器
+      window.setInterval(next, 100)
+
+
+    }
+  </script>
+</head>
+<body id="body1">
+
+
+</body>
+</html>
